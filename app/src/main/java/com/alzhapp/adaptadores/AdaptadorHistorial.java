@@ -18,10 +18,10 @@ import java.util.Locale;
 
 public class AdaptadorHistorial extends BaseAdapter {
 
-    private VistaHistorialActivity actividad;
-    private int layoutTarjeta;
-    private List<Sesion> sesiones;
-    private SimpleDateFormat formatoFecha;
+    private final VistaHistorialActivity actividad;
+    private final int layoutTarjeta;
+    private final List<Sesion> sesiones;
+    private final SimpleDateFormat formatoFecha;
 
     public AdaptadorHistorial(VistaHistorialActivity actividad, int layoutTarjeta, List<Sesion> sesiones) {
         this.actividad = actividad;

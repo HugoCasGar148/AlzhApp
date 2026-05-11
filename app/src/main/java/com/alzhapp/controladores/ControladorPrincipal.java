@@ -7,7 +7,7 @@ import com.alzhapp.vistas.MainActivity;
 
 public class ControladorPrincipal implements View.OnClickListener {
 
-    private MainActivity vista;
+    private final MainActivity vista;
 
     public ControladorPrincipal(MainActivity vista) {
         this.vista = vista;

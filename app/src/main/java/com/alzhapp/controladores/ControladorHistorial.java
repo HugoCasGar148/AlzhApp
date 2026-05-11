@@ -15,9 +15,9 @@ public class ControladorHistorial implements View.OnClickListener,
         AdapterView.OnItemSelectedListener,
         AdapterView.OnItemClickListener {
 
-    private VistaHistorialActivity vista;
-    private GestorSQLite gestorSQLite;
-    private AdaptadorHistorial adaptadorHistorial;
+    private final VistaHistorialActivity vista;
+    private final GestorSQLite gestorSQLite;
+    private final AdaptadorHistorial adaptadorHistorial;
 
     public ControladorHistorial(VistaHistorialActivity vista) {
         this.vista = vista;

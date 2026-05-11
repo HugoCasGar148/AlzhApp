@@ -59,12 +59,12 @@ public class ControladorImagenes implements View.OnClickListener {
         }
     }
 
-    private VistaImagenesActivity vista;
-    private GestorSQLite gestorSQLite;
-    private Configuracion configuracion;
-    private EjercicioImagenes ejercicio;
+    private final VistaImagenesActivity vista;
+    private final GestorSQLite gestorSQLite;
+    private final Configuracion configuracion;
+    private final EjercicioImagenes ejercicio;
     private List<PreguntaImagen> preguntas;
-    private Random random;
+    private final Random random;
     private int indiceActual;
 
     public ControladorImagenes(VistaImagenesActivity vista) {

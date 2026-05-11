@@ -27,8 +27,8 @@ public class ControladorAjustes implements View.OnClickListener, CompoundButton.
     private static final int REQUEST_RECORDATORIO = 2001;
 
     private VistaAjustesActivity vista;
-    private Context contexto;
-    private GestorSQLite gestorSQLite;
+    private final Context contexto;
+    private final GestorSQLite gestorSQLite;
 
     public ControladorAjustes(VistaAjustesActivity vista) {
         this.vista = vista;

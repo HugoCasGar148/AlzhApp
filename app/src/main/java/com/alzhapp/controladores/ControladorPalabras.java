@@ -62,13 +62,13 @@ public class ControladorPalabras implements View.OnClickListener {
         }
     }
 
-    private VistaPalabrasActivity vista;
-    private GestorSQLite gestorSQLite;
-    private Configuracion configuracion;
-    private EjercicioPalabras ejercicio;
+    private final VistaPalabrasActivity vista;
+    private final GestorSQLite gestorSQLite;
+    private final Configuracion configuracion;
+    private final EjercicioPalabras ejercicio;
     private List<PreguntaPalabra> preguntas;
-    private Random random;
-    private Handler handler;
+    private final Random random;
+    private final Handler handler;
     private int indiceActual;
 
     public ControladorPalabras(VistaPalabrasActivity vista) {

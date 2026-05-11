@@ -61,12 +61,12 @@ public class ControladorAsociacion implements View.OnClickListener {
         }
     }
 
-    private VistaAsociacionActivity vista;
-    private GestorSQLite gestorSQLite;
-    private Configuracion configuracion;
-    private EjercicioAsociacion ejercicio;
+    private final VistaAsociacionActivity vista;
+    private final GestorSQLite gestorSQLite;
+    private final Configuracion configuracion;
+    private final EjercicioAsociacion ejercicio;
     private List<PreguntaAsociacion> preguntas;
-    private Random random;
+    private final Random random;
     private int indiceActual;
 
     public ControladorAsociacion(VistaAsociacionActivity vista) {
