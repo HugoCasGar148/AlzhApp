@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">AlzhApp</string>
+    <string name="titulo_principal">AlzhApp</string>
+    <string name="subtitulo_inicio">Estimulación cognitiva simple y accesible</string>
+
+    <string name="modulo_imagenes">IMÁGENES</string>
+    <string name="modulo_palabras">PALABRAS</string>
+    <string name="modulo_asociacion">ASOCIACIÓN</string>
+    <string name="ver_historial">VER HISTORIAL</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="historial">Historial</string>
+
+    <string name="guardar_ajustes">Guardar ajustes</string>
+    <string name="borrar_historial">Borrar historial</string>
+    <string name="dificultad">Dificultad</string>
+    <string name="dificultad_baja">Baja</string>
+    <string name="dificultad_media">Media</string>
+    <string name="dificultad_alta">Alta</string>
+    <string name="recordatorio_diario">Recordatorio diario</string>
+    <string name="seleccionar_hora">Seleccionar hora</string>
+    <string name="hora_actual">Hora actual: %1$s</string>
+    <string name="sin_resultados">Sin resultados todavía</string>
+    <string name="filtro_modulo">Filtrar por módulo</string>
+    <string name="filtro_todos">Todos</string>
+    <string name="filtro_imagenes">Imágenes</string>
+    <string name="filtro_palabras">Palabras</string>
+    <string name="filtro_asociacion">Asociación</string>
+
+    <string name="volver">Volver</string>
+    <string name="siguiente">Siguiente</string>
+    <string name="memoriza">Memoriza estas palabras</string>
+    <string name="elige_palabra">Selecciona una palabra que haya aparecido</string>
+    <string name="elige_pareja">Selecciona la pareja correcta de: %1$s</string>
+    <string name="elige_imagen">Selecciona la opción que coincide con la imagen</string>
+    <string name="pregunta_contador">Pregunta %1$d de %2$d</string>
+    <string name="resultado_titulo">Resumen de la sesión</string>
+    <string name="resultado_detalle">Aciertos: %1$d\nErrores: %2$d\nTiempo: %3$d s\nPuntuación: %4$d</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="confirmar_borrado">¿Desea borrar todo el historial?</string>
+    <string name="historial_borrado">Historial borrado correctamente</string>
+    <string name="ajustes_guardados">Ajustes guardados correctamente</string>
+    <string name="ajustes_guardado_error">No se han podido guardar los ajustes</string>
+    <string name="recordatorio_titulo">Es hora de entrenar</string>
+    <string name="recordatorio_texto">Abra AlzhApp y complete una sesión de ejercicios.</string>
+    <string name="recordatorio_programado">Recordatorio guardado para las %1$s</string>
+    <string name="iniciar_modulo">Iniciar sesión</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="seleccion_correcta">Correcto</string>
+    <string name="seleccion_incorrecta">Incorrecto</string>
+    <string name="sin_permiso_notificaciones">El recordatorio se ha guardado, pero el sistema necesita permiso de notificaciones para mostrar avisos.</string>
+    <string name="imposible_programar_recordatorio">No se ha podido programar el recordatorio.</string>
+    <string name="descripcion_ajustes">Abrir ajustes</string>
+    <string name="descripcion_imagen_objetivo">Imagen del ejercicio</string>
+    <string name="salir_modulo">Salir del módulo</string>
+    <string name="confirmar_salida">Si sales ahora, la sesión no se guardará. ¿Deseas salir?</string>
+    <string name="tiempo_agotado">Tiempo agotado. Se continúa con la siguiente pregunta.</string>
+    <string name="historial_item_formato">%1$s\nMódulo: %2$s · Puntuación: %3$d · Tiempo: %4$d s\nAciertos: %5$d · Errores: %6$d</string>
+    <string name="canal_recordatorios">Recordatorios AlzhApp</string>
+    <string name="canal_recordatorios_descripcion">Canal para recordatorios diarios de la aplicación</string>
+</resources>

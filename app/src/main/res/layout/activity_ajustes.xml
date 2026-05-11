@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootAjustes"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alzhapp_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ajustes"
+            android:textColor="@color/alzhapp_primary_dark"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/dificultad"
+            android:textColor="@color/alzhapp_text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/rgDificultad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <RadioButton
+                android:id="@+id/rbBaja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/dificultad_baja"
+                android:textColor="@color/alzhapp_text"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/rbMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/dificultad_media"
+                android:textColor="@color/alzhapp_text"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/rbAlta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/dificultad_alta"
+                android:textColor="@color/alzhapp_text"
+                android:textSize="18sp" />
+        </RadioGroup>
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchRecordatorio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/recordatorio_diario"
+            android:textColor="@color/alzhapp_text"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvHoraSeleccionada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/alzhapp_text"
+            android:textSize="16sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSeleccionarHora"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/seleccionar_hora"
+            android:textColor="@color/alzhapp_text"
+            android:textSize="18sp"
+            app:backgroundTint="@color/alzhapp_secondary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardarAjustes"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/guardar_ajustes"
+            android:textSize="18sp"
+            app:backgroundTint="@color/alzhapp_primary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBorrarHistorial"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/borrar_historial"
+            android:textSize="18sp"
+            app:backgroundTint="@color/alzhapp_error" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVolverAjustes"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/volver"
+            android:textColor="@color/alzhapp_text"
+            android:textSize="18sp"
+            app:backgroundTint="@color/alzhapp_secondary" />
+
+    </LinearLayout>
+</ScrollView>

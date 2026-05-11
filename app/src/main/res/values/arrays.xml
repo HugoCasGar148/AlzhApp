@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dificultades_array">
+        <item>@string/dificultad_baja</item>
+        <item>@string/dificultad_media</item>
+        <item>@string/dificultad_alta</item>
+    </string-array>
+
+    <string-array name="filtro_historial_array">
+        <item>@string/filtro_todos</item>
+        <item>@string/filtro_imagenes</item>
+        <item>@string/filtro_palabras</item>
+        <item>@string/filtro_asociacion</item>
+    </string-array>
+</resources>

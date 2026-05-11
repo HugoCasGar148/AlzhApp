@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="alzhapp_background">#F8FAFC</color>
+    <color name="alzhapp_primary">#3B82F6</color>
+    <color name="alzhapp_primary_dark">#1E293B</color>
+    <color name="alzhapp_secondary">#E2E8F0</color>
+    <color name="alzhapp_muted">#64748B</color>
+    <color name="alzhapp_text">#334155</color>
+    <color name="alzhapp_success">#15803D</color>
+    <color name="alzhapp_error">#B91C1C</color>
+</resources>

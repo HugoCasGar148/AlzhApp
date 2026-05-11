@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.AlzhApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/alzhapp_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:statusBarColor">@color/alzhapp_background</item>
+        <item name="android:navigationBarColor">@color/alzhapp_background</item>
+        <item name="android:windowBackground">@color/alzhapp_background</item>
+    </style>
+
+    <style name="Theme.AlzhApp" parent="Base.Theme.AlzhApp" />
+</resources>

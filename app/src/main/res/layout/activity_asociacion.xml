@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootAsociacion"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alzhapp_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/modulo_asociacion"
+            android:textColor="@color/alzhapp_primary_dark"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvContadorAsociacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/alzhapp_text"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvAsociacionBase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:textColor="@color/alzhapp_primary_dark"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAsociacionOpcion1"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="24dp"
+            android:textSize="20sp"
+            app:backgroundTint="@color/alzhapp_primary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAsociacionOpcion2"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="12dp"
+            android:textSize="20sp"
+            app:backgroundTint="@color/alzhapp_primary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAsociacionOpcion3"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="12dp"
+            android:textSize="20sp"
+            app:backgroundTint="@color/alzhapp_primary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAsociacionOpcion4"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="12dp"
+            android:textSize="20sp"
+            app:backgroundTint="@color/alzhapp_primary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVolverAsociacion"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/volver"
+            android:textColor="@color/alzhapp_text"
+            android:textSize="18sp"
+            app:backgroundTint="@color/alzhapp_secondary" />
+    </LinearLayout>
+</ScrollView>
