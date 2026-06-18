@@ -1,0 +1,10 @@
+casa
+sol
+gato
+mesa
+árbol
+libro
+agua
+flor
+puerta
+tren

@@ -1,0 +1,8 @@
+Cámara|ic_menu_camera
+Teléfono|ic_menu_call
+Agenda|ic_menu_agenda
+Mapa|ic_menu_mapmode
+Galería|ic_menu_gallery
+Ayuda|ic_menu_help
+Dirección|ic_menu_directions
+Edición|ic_menu_edit

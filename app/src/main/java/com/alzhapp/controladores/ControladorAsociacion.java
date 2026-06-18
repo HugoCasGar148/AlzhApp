@@ -4,8 +4,9 @@ import android.view.View;
 
 import com.alzhapp.R;
 import com.alzhapp.modelos.Configuracion;
+import com.alzhapp.modelos.Dificultad;
 import com.alzhapp.modelos.EjercicioAsociacion;
-import com.alzhapp.sqlite.GestorSQLite;
+import com.alzhapp.sqlite.GestorDatos;
 import com.alzhapp.modelos.ItemCatalogo;
 import com.alzhapp.modelos.Sesion;
 import com.alzhapp.vistas.VistaAsociacionActivity;
@@ -62,7 +63,7 @@ public class ControladorAsociacion implements View.OnClickListener {
     }
 
     private final VistaAsociacionActivity vista;
-    private final GestorSQLite gestorSQLite;
+    private final GestorDatos gestorDatos;
     private final Configuracion configuracion;
     private final EjercicioAsociacion ejercicio;
     private List<PreguntaAsociacion> preguntas;
@@ -71,16 +72,17 @@ public class ControladorAsociacion implements View.OnClickListener {
 
     public ControladorAsociacion(VistaAsociacionActivity vista) {
         this.vista = vista;
-        this.gestorSQLite = new GestorSQLite(vista);
-        this.configuracion = gestorSQLite.obtenerConfiguracion();
-        this.ejercicio = new EjercicioAsociacion(configuracion.getDificultad());
+        this.gestorDatos = new GestorDatos(vista);
+        this.configuracion = gestorDatos.obtenerConfiguracion();
+        // Yo uso .getValor() para mantener la compatibilidad con el Ejercicio
+        this.ejercicio = new EjercicioAsociacion(configuracion.getDificultad().getValor());
         this.random = new Random();
         this.preguntas = new ArrayList<>();
     }
 
     public void iniciarEjercicio() {
         ejercicio.iniciarSesion();
-        preguntas = generarPreguntas(gestorSQLite.obtenerItemsPorModulo("asociacion"));
+        preguntas = generarPreguntas(gestorDatos.obtenerItemsPorModulo("asociacion"));
         indiceActual = 0;
         mostrarPreguntaActual();
     }
@@ -146,16 +148,16 @@ public class ControladorAsociacion implements View.OnClickListener {
     }
 
     private int obtenerTotalPreguntas() {
-        if (configuracion.getDificultad() == Configuracion.DIFICULTAD_MEDIA) {
+        if (configuracion.getDificultad() == Dificultad.MEDIA) {
             return 4;
-        } else if (configuracion.getDificultad() == Configuracion.DIFICULTAD_ALTA) {
+        } else if (configuracion.getDificultad() == Dificultad.ALTA) {
             return 5;
         }
         return 3;
     }
 
     private int obtenerNumeroOpciones() {
-        if (configuracion.getDificultad() == Configuracion.DIFICULTAD_ALTA) {
+        if (configuracion.getDificultad() == Dificultad.ALTA) {
             return 4;
         }
         return 3;
@@ -210,7 +212,7 @@ public class ControladorAsociacion implements View.OnClickListener {
                 ejercicio.getAciertos(),
                 ejercicio.getErrores()
         );
-        gestorSQLite.insertarSesion(sesion);
+        gestorDatos.insertarSesion(sesion);
         vista.mostrarResultado(sesion);
     }
 }

@@ -1,31 +1,32 @@
 package com.alzhapp.modelos;
 
 public class Configuracion {
-    public static final int DIFICULTAD_BAJA = 1;
-    public static final int DIFICULTAD_MEDIA = 2;
-    public static final int DIFICULTAD_ALTA = 3;
     public static final String HORA_PREDETERMINADA = "09:00";
 
-    private int dificultad;
+    private Dificultad dificultad;
     private boolean recordatorioActivo;
     private String recordatorioHora;
 
     public Configuracion() {
-        this(DIFICULTAD_BAJA, false, HORA_PREDETERMINADA);
+        this(Dificultad.BAJA, false, HORA_PREDETERMINADA);
     }
 
-    public Configuracion(int dificultad, boolean recordatorioActivo, String recordatorioHora) {
+    public Configuracion(Dificultad dificultad, boolean recordatorioActivo, String recordatorioHora) {
         setDificultad(dificultad);
         this.recordatorioActivo = recordatorioActivo;
         setRecordatorioHora(recordatorioHora);
     }
 
-    public int getDificultad() {
+    public Configuracion(int valorDificultad, boolean recordatorioActivo, String recordatorioHora) {
+        this(Dificultad.desdeValor(valorDificultad), recordatorioActivo, recordatorioHora);
+    }
+
+    public Dificultad getDificultad() {
         return dificultad;
     }
 
-    public void setDificultad(int dificultad) {
-        this.dificultad = esDificultadValida(dificultad) ? dificultad : DIFICULTAD_BAJA;
+    public void setDificultad(Dificultad dificultad) {
+        this.dificultad = (dificultad != null) ? dificultad : Dificultad.BAJA;
     }
 
     public boolean isRecordatorioActivo() {
@@ -42,12 +43,6 @@ public class Configuracion {
 
     public void setRecordatorioHora(String recordatorioHora) {
         this.recordatorioHora = normalizarHora(recordatorioHora);
-    }
-
-    public static boolean esDificultadValida(int dificultad) {
-        return dificultad == DIFICULTAD_BAJA
-                || dificultad == DIFICULTAD_MEDIA
-                || dificultad == DIFICULTAD_ALTA;
     }
 
     public static String normalizarHora(String hora) {

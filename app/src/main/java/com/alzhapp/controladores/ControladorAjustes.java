@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat;
 
 import com.alzhapp.R;
 import com.alzhapp.modelos.Configuracion;
-import com.alzhapp.sqlite.GestorSQLite;
+import com.alzhapp.sqlite.GestorDatos;
 import com.alzhapp.vistas.VistaAjustesActivity;
 
 import java.util.Calendar;
@@ -28,17 +28,17 @@ public class ControladorAjustes implements View.OnClickListener, CompoundButton.
 
     private VistaAjustesActivity vista;
     private final Context contexto;
-    private final GestorSQLite gestorSQLite;
+    private final GestorDatos gestorDatos;
 
     public ControladorAjustes(VistaAjustesActivity vista) {
         this.vista = vista;
         this.contexto = vista;
-        this.gestorSQLite = new GestorSQLite(vista);
+        this.gestorDatos = new GestorDatos(vista);
     }
 
     public ControladorAjustes(Context contexto) {
         this.contexto = contexto;
-        this.gestorSQLite = new GestorSQLite(contexto);
+        this.gestorDatos = new GestorDatos(contexto);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ControladorAjustes implements View.OnClickListener, CompoundButton.
     }
 
     public void cargarConfiguracion() {
-        Configuracion configuracion = gestorSQLite.obtenerConfiguracion();
+        Configuracion configuracion = gestorDatos.obtenerConfiguracion();
         vista.mostrarConfiguracion(configuracion);
     }
 
@@ -84,7 +84,7 @@ public class ControladorAjustes implements View.OnClickListener, CompoundButton.
                 vista.getHoraSeleccionada()
         );
 
-        boolean guardado = gestorSQLite.guardarConfiguracion(configuracion);
+        boolean guardado = gestorDatos.guardarConfiguracion(configuracion);
         if (guardado) {
             if (configuracion.isRecordatorioActivo()) {
                 programarRecordatorio(vista, configuracion.getRecordatorioHora());
@@ -99,14 +99,14 @@ public class ControladorAjustes implements View.OnClickListener, CompoundButton.
     }
 
     public void borrarHistorial() {
-        boolean borrado = gestorSQLite.borrarHistorial();
+        boolean borrado = gestorDatos.borrarHistorial();
         if (vista != null && borrado) {
             vista.mostrarMensaje(vista.getString(R.string.historial_borrado));
         }
     }
 
     public void reprogramarRecordatorioSegunConfiguracion(Context context) {
-        Configuracion configuracion = gestorSQLite.obtenerConfiguracion();
+        Configuracion configuracion = gestorDatos.obtenerConfiguracion();
         if (configuracion.isRecordatorioActivo()) {
             programarRecordatorio(context, configuracion.getRecordatorioHora());
         }

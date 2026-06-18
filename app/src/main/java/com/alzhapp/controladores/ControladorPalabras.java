@@ -6,8 +6,9 @@ import android.view.View;
 
 import com.alzhapp.R;
 import com.alzhapp.modelos.Configuracion;
+import com.alzhapp.modelos.Dificultad;
 import com.alzhapp.modelos.EjercicioPalabras;
-import com.alzhapp.sqlite.GestorSQLite;
+import com.alzhapp.sqlite.GestorDatos;
 import com.alzhapp.modelos.ItemCatalogo;
 import com.alzhapp.modelos.Sesion;
 import com.alzhapp.vistas.VistaPalabrasActivity;
@@ -63,7 +64,7 @@ public class ControladorPalabras implements View.OnClickListener {
     }
 
     private final VistaPalabrasActivity vista;
-    private final GestorSQLite gestorSQLite;
+    private final GestorDatos gestorDatos;
     private final Configuracion configuracion;
     private final EjercicioPalabras ejercicio;
     private List<PreguntaPalabra> preguntas;
@@ -73,9 +74,10 @@ public class ControladorPalabras implements View.OnClickListener {
 
     public ControladorPalabras(VistaPalabrasActivity vista) {
         this.vista = vista;
-        this.gestorSQLite = new GestorSQLite(vista);
-        this.configuracion = gestorSQLite.obtenerConfiguracion();
-        this.ejercicio = new EjercicioPalabras(configuracion.getDificultad());
+        this.gestorDatos = new GestorDatos(vista);
+        this.configuracion = gestorDatos.obtenerConfiguracion();
+        // Yo extraigo el valor entero para mantener la compatibilidad con tu clase EjercicioPalabras
+        this.ejercicio = new EjercicioPalabras(configuracion.getDificultad().getValor());
         this.random = new Random();
         this.handler = new Handler(Looper.getMainLooper());
         this.preguntas = new ArrayList<>();
@@ -83,7 +85,7 @@ public class ControladorPalabras implements View.OnClickListener {
 
     public void iniciarEjercicio() {
         ejercicio.iniciarSesion();
-        preguntas = generarPreguntas(gestorSQLite.obtenerItemsPorModulo("palabras"));
+        preguntas = generarPreguntas(gestorDatos.obtenerItemsPorModulo("palabras"));
         indiceActual = 0;
         mostrarFaseMemorizacion();
     }
@@ -146,16 +148,16 @@ public class ControladorPalabras implements View.OnClickListener {
     }
 
     private int obtenerTotalPreguntas() {
-        if (configuracion.getDificultad() == Configuracion.DIFICULTAD_MEDIA) {
+        if (configuracion.getDificultad() == Dificultad.MEDIA) {
             return 4;
-        } else if (configuracion.getDificultad() == Configuracion.DIFICULTAD_ALTA) {
+        } else if (configuracion.getDificultad() == Dificultad.ALTA) {
             return 5;
         }
         return 3;
     }
 
     private int obtenerNumeroOpciones() {
-        if (configuracion.getDificultad() == Configuracion.DIFICULTAD_ALTA) {
+        if (configuracion.getDificultad() == Dificultad.ALTA) {
             return 4;
         }
         return 3;
@@ -247,7 +249,7 @@ public class ControladorPalabras implements View.OnClickListener {
                 ejercicio.getAciertos(),
                 ejercicio.getErrores()
         );
-        gestorSQLite.insertarSesion(sesion);
+        gestorDatos.insertarSesion(sesion);
         vista.mostrarResultado(sesion);
     }
 

@@ -1,0 +1,14 @@
+Perro|1
+Ladra|1
+Gato|2
+Maúlla|2
+Vaca|3
+Muge|3
+Sol|4
+Día|4
+Luna|5
+Noche|5
+Llave|6
+Puerta|6
+Pez|7
+Agua|7

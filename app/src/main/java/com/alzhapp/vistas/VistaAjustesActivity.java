@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.alzhapp.R;
 import com.alzhapp.controladores.ControladorAjustes;
 import com.alzhapp.modelos.Configuracion;
+import com.alzhapp.modelos.Dificultad;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
@@ -86,25 +87,27 @@ public class VistaAjustesActivity extends AppCompatActivity {
         actualizarEstadoHora();
     }
 
-    public void seleccionarDificultad(int dificultad) {
-        if (dificultad == Configuracion.DIFICULTAD_MEDIA) {
+    // Corrección: Ahora recibimos el enum Dificultad
+    public void seleccionarDificultad(Dificultad dificultad) {
+        if (dificultad == Dificultad.MEDIA) {
             rgDificultad.check(R.id.rbMedia);
-        } else if (dificultad == Configuracion.DIFICULTAD_ALTA) {
+        } else if (dificultad == Dificultad.ALTA) {
             rgDificultad.check(R.id.rbAlta);
         } else {
             rgDificultad.check(R.id.rbBaja);
         }
     }
 
-    public int obtenerDificultadSeleccionada() {
+    // Corrección: Ahora devolvemos el enum Dificultad
+    public Dificultad obtenerDificultadSeleccionada() {
         int checkedId = rgDificultad.getCheckedRadioButtonId();
 
         if (checkedId == R.id.rbMedia) {
-            return Configuracion.DIFICULTAD_MEDIA;
+            return Dificultad.MEDIA;
         } else if (checkedId == R.id.rbAlta) {
-            return Configuracion.DIFICULTAD_ALTA;
+            return Dificultad.ALTA;
         }
-        return Configuracion.DIFICULTAD_BAJA;
+        return Dificultad.BAJA;
     }
 
     public void actualizarEstadoHora() {

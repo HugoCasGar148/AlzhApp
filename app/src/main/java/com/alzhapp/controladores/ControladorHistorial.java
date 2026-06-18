@@ -5,7 +5,7 @@ import android.widget.AdapterView;
 
 import com.alzhapp.R;
 import com.alzhapp.adaptadores.AdaptadorHistorial;
-import com.alzhapp.sqlite.GestorSQLite;
+import com.alzhapp.sqlite.GestorDatos;
 import com.alzhapp.modelos.Sesion;
 import com.alzhapp.vistas.VistaHistorialActivity;
 
@@ -16,13 +16,13 @@ public class ControladorHistorial implements View.OnClickListener,
         AdapterView.OnItemClickListener {
 
     private final VistaHistorialActivity vista;
-    private final GestorSQLite gestorSQLite;
+    private final GestorDatos gestorDatos;
     private final AdaptadorHistorial adaptadorHistorial;
 
     public ControladorHistorial(VistaHistorialActivity vista) {
         this.vista = vista;
-        this.gestorSQLite = new GestorSQLite(vista);
-        this.adaptadorHistorial = new AdaptadorHistorial(vista, R.layout.item_historial, gestorSQLite.obtenerHistorial());
+        this.gestorDatos = new GestorDatos(vista);
+        this.adaptadorHistorial = new AdaptadorHistorial(vista, R.layout.item_historial, gestorDatos.obtenerHistorial());
     }
 
     @Override
@@ -59,9 +59,9 @@ public class ControladorHistorial implements View.OnClickListener,
         List<Sesion> sesiones;
 
         if (modulo == null) {
-            sesiones = gestorSQLite.obtenerHistorial();
+            sesiones = gestorDatos.obtenerHistorial();
         } else {
-            sesiones = gestorSQLite.obtenerHistorialPorModulo(modulo);
+            sesiones = gestorDatos.obtenerHistorialPorModulo(modulo);
         }
 
         adaptadorHistorial.actualizarDatos(sesiones);
@@ -69,7 +69,7 @@ public class ControladorHistorial implements View.OnClickListener,
     }
 
     public boolean borrarHistorial() {
-        boolean borrado = gestorSQLite.borrarHistorial();
+        boolean borrado = gestorDatos.borrarHistorial();
         cargarHistorial();
         return borrado;
     }
