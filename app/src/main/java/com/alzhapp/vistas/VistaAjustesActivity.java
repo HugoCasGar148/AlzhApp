@@ -25,8 +25,14 @@ import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.util.Locale;
 
+/**
+ * Actividad que representa la pantalla de configuración de la aplicación.
+ * Actúa como la "Vista" en el patrón MVC/MVP, encargándose de renderizar la interfaz,
+ * gestionar los elementos visuales y delegar los eventos del usuario al ControladorAjustes.
+ */
 public class VistaAjustesActivity extends AppCompatActivity {
 
+    // Componentes de la interfaz de usuario
     private RadioGroup rgDificultad;
     private RadioButton rbBaja;
     private RadioButton rbMedia;
@@ -37,25 +43,36 @@ public class VistaAjustesActivity extends AppCompatActivity {
     private MaterialButton btnGuardarAjustes;
     private MaterialButton btnBorrarHistorial;
     private MaterialButton btnVolverAjustes;
+
+    // Variables de estado
     private String horaSeleccionada;
     private ControladorAjustes controladorAjustes;
 
+    /**
+     * Método del ciclo de vida de Android ejecutado al crear la actividad.
+     * Inicializa el diseño base y configura la vista para respetar los márgenes del sistema (Edge-to-Edge).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_ajustes);
 
+        // Aplica un padding automático para evitar que la UI quede oculta bajo la barra de estado o navegación
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rootAjustes), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // Inicialización de la vista
         recogerElementos();
         establecerEscuchadores();
     }
 
+    /**
+     * Vincula las variables locales con los componentes definidos en el archivo XML del layout.
+     */
     private void recogerElementos() {
         rgDificultad = findViewById(R.id.rgDificultad);
         rbBaja = findViewById(R.id.rbBaja);
@@ -69,6 +86,10 @@ public class VistaAjustesActivity extends AppCompatActivity {
         btnVolverAjustes = findViewById(R.id.btnVolverAjustes);
     }
 
+    /**
+     * Instancia el controlador y asigna los listeners correspondientes a los componentes interactivos.
+     * También solicita la carga inicial de los datos guardados en la base de datos.
+     */
     private void establecerEscuchadores() {
         controladorAjustes = new ControladorAjustes(this);
         switchRecordatorio.setOnCheckedChangeListener(controladorAjustes);
@@ -76,9 +97,14 @@ public class VistaAjustesActivity extends AppCompatActivity {
         btnGuardarAjustes.setOnClickListener(controladorAjustes);
         btnBorrarHistorial.setOnClickListener(controladorAjustes);
         btnVolverAjustes.setOnClickListener(controladorAjustes);
+
         controladorAjustes.cargarConfiguracion();
     }
 
+    /**
+     * Recibe el modelo de configuración actual y actualiza todos los componentes
+     * de la pantalla (RadioButtons, Switch, TextView) para reflejar dichos datos.
+     */
     public void mostrarConfiguracion(Configuracion configuracion) {
         horaSeleccionada = configuracion.getRecordatorioHora();
         seleccionarDificultad(configuracion.getDificultad());
@@ -87,7 +113,9 @@ public class VistaAjustesActivity extends AppCompatActivity {
         actualizarEstadoHora();
     }
 
-    // Corrección: Ahora recibimos el enum Dificultad
+    /**
+     * Marca el RadioButton correspondiente en la interfaz basándose en el enum Dificultad proporcionado.
+     */
     public void seleccionarDificultad(Dificultad dificultad) {
         if (dificultad == Dificultad.MEDIA) {
             rgDificultad.check(R.id.rbMedia);
@@ -98,7 +126,9 @@ public class VistaAjustesActivity extends AppCompatActivity {
         }
     }
 
-    // Corrección: Ahora devolvemos el enum Dificultad
+    /**
+     * Evalúa el estado del RadioGroup en la interfaz y devuelve el enum Dificultad equivalente.
+     */
     public Dificultad obtenerDificultadSeleccionada() {
         int checkedId = rgDificultad.getCheckedRadioButtonId();
 
@@ -110,12 +140,20 @@ public class VistaAjustesActivity extends AppCompatActivity {
         return Dificultad.BAJA;
     }
 
+    /**
+     * Habilita o deshabilita visualmente el botón de selección de hora y ajusta
+     * la opacidad (alpha) del texto en función de si el switch de recordatorio está activo.
+     */
     public void actualizarEstadoHora() {
         boolean activo = switchRecordatorio.isChecked();
         btnSeleccionarHora.setEnabled(activo);
         tvHora.setAlpha(activo ? 1f : 0.6f);
     }
 
+    /**
+     * Despliega un diálogo nativo (TimePickerDialog) para permitir al usuario seleccionar una hora.
+     * Actualiza la variable local y la interfaz al confirmar la selección.
+     */
     public void abrirSelectorHora() {
         if (!switchRecordatorio.isChecked()) {
             return;
@@ -135,6 +173,10 @@ public class VistaAjustesActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Muestra un diálogo de alerta (AlertDialog) para solicitar confirmación antes
+     * de ejecutar el borrado del historial a través del controlador.
+     */
     public void mostrarDialogoBorrado() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.borrar_historial);
@@ -149,9 +191,17 @@ public class VistaAjustesActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Muestra un mensaje emergente nativo (Toast) en la pantalla.
+     */
     public void mostrarMensaje(String mensaje) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
     }
+
+    // =========================================================
+    // GETTERS
+    // Permiten al controlador acceder a los componentes y valores de la vista
+    // =========================================================
 
     public RadioGroup getRgDificultad() {
         return rgDificultad;

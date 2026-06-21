@@ -2,9 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- ========================================================= -->
+    <!-- PERMISOS: Necesarios para poder enviar notificaciones     -->
+    <!-- al usuario y para que la app se despierte al reiniciar.   -->
+    <!-- ========================================================= -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!-- ========================================================= -->
+    <!-- APLICACIÓN: Configuración general. allowBackup="false"    -->
+    <!-- evita que se suban los datos a Google Drive (ideal por    -->
+    <!-- temas de privacidad en apps como AlzhApp).                -->
+    <!-- ========================================================= -->
     <application
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,23 +24,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AlzhApp">
 
+        <!-- ========================================================= -->
+        <!-- ACTIVIDADES SECUNDARIAS: Pantallas de la app.             -->
+        <!-- exported="false" por seguridad, para que otras apps       -->
+        <!-- no puedan abrirlas directamente.                          -->
+        <!-- ========================================================= -->
         <activity android:name=".vistas.VistaAjustesActivity" android:exported="false" />
         <activity android:name=".vistas.VistaHistorialActivity" android:exported="false" />
         <activity android:name=".vistas.VistaAsociacionActivity" android:exported="false" />
         <activity android:name=".vistas.VistaPalabrasActivity" android:exported="false" />
         <activity android:name=".vistas.VistaImagenesActivity" android:exported="false" />
+
+        <!-- ========================================================= -->
+        <!-- ACTIVIDAD PRINCIPAL (Entry Point): Es la pantalla de      -->
+        <!-- inicio. exported="true" es obligatorio aquí.              -->
+        <!-- ========================================================= -->
         <activity android:name=".vistas.MainActivity" android:exported="true">
             <intent-filter>
+                <!-- Define que esta es la acción principal al abrir la app -->
                 <action android:name="android.intent.action.MAIN" />
+                <!-- Pone el icono de la app en el menú del teléfono -->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- ========================================================= -->
+        <!-- RECEPTORES (BROADCAST RECEIVERS): Para tareas en          -->
+        <!-- segundo plano (notificaciones y alarmas).                 -->
+        <!-- ========================================================= -->
+
+        <!-- Receptor que procesa y lanza los recordatorios -->
         <receiver
             android:name=".controladores.RecordatorioReceiver"
             android:exported="false"
             tools:targetApi="33" />
 
+        <!-- Receptor que detecta cuándo se enciende el móvil para  -->
+        <!-- volver a programar las alarmas que se hayan borrado.   -->
         <receiver
             android:name=".controladores.ReinicioRecordatorioReceiver"
             android:enabled="true"

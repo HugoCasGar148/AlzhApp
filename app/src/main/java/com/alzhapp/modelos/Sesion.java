@@ -1,6 +1,12 @@
 package com.alzhapp.modelos;
 
+/**
+ * Entidad que representa una sesión de ejercicio finalizada.
+ * Actúa como Data Transfer Object (DTO) para la persistencia de estadísticas
+ * en la base de datos (SQLite) y su posterior visualización en el historial.
+ */
 public class Sesion {
+
     private long idSesion;
     private long fechaHora;
     private String modulo;
@@ -10,9 +16,19 @@ public class Sesion {
     private int aciertos;
     private int errores;
 
+    /**
+     * Constructor vacío por defecto.
+     * Requerido para la instanciación y mapeo de datos manual
+     * tras la lectura de registros (ej. desde un Cursor de SQLite).
+     */
     public Sesion() {
     }
 
+    /**
+     * Constructor de inserción.
+     * Excluye el parámetro 'idSesion' para delegar la generación del identificador
+     * único al motor de base de datos (AUTOINCREMENT) al persistir una nueva entidad.
+     */
     public Sesion(long fechaHora, String modulo, int dificultad, int puntuacion, int tiempoSegundos, int aciertos, int errores) {
         this.fechaHora = fechaHora;
         this.modulo = modulo;

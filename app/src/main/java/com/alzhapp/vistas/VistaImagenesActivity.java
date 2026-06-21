@@ -23,9 +23,17 @@ import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
+/**
+ * Actividad que representa la pantalla principal del ejercicio de Imágenes.
+ * Actúa como la "Vista" dentro del patrón de arquitectura MVC/MVP, encargándose de
+ * actualizar la interfaz gráfica y de delegar los eventos del usuario al ControladorImagenes.
+ */
 public class VistaImagenesActivity extends AppCompatActivity {
 
+    // Referencia al controlador encargado de la lógica de negocio
     private ControladorImagenes controladorImagenes;
+
+    // Componentes de la interfaz de usuario
     private TextView tvContador;
     private ImageView imageViewObjetivo;
     private MaterialButton btnOpcion1;
@@ -34,12 +42,17 @@ public class VistaImagenesActivity extends AppCompatActivity {
     private MaterialButton btnOpcion4;
     private MaterialButton btnVolver;
 
+    /**
+     * Método del ciclo de vida de Android invocado en la creación de la actividad.
+     * Configura el diseño Edge-to-Edge, inicializa la vista y arranca el ciclo del ejercicio.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_imagenes);
 
+        // Aplica un padding dinámico a la vista raíz para evitar solapamientos con las barras del sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rootImagenes), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -49,9 +62,14 @@ public class VistaImagenesActivity extends AppCompatActivity {
         recogerElementos();
         establecerEscuchadores();
         prepararSalida();
+
+        // Delega en el controlador el inicio de la primera ronda
         controladorImagenes.iniciarEjercicio();
     }
 
+    /**
+     * Vincula las variables locales de la clase con los componentes definidos en el archivo XML (layout).
+     */
     private void recogerElementos() {
         tvContador = findViewById(R.id.tvContadorImagenes);
         imageViewObjetivo = findViewById(R.id.imageViewObjetivo);
@@ -62,6 +80,10 @@ public class VistaImagenesActivity extends AppCompatActivity {
         btnVolver = findViewById(R.id.btnVolverImagenes);
     }
 
+    /**
+     * Instancia el controlador y lo asigna como listener de los eventos de clic
+     * en los elementos interactivos de la pantalla.
+     */
     private void establecerEscuchadores() {
         controladorImagenes = new ControladorImagenes(this);
         btnOpcion1.setOnClickListener(controladorImagenes);
@@ -71,6 +93,10 @@ public class VistaImagenesActivity extends AppCompatActivity {
         btnVolver.setOnClickListener(controladorImagenes);
     }
 
+    /**
+     * Intercepta el evento de navegación hacia atrás (botón físico o gesto del sistema)
+     * mediante el OnBackPressedDispatcher, derivando la acción al método de confirmación.
+     */
     private void prepararSalida() {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -80,20 +106,32 @@ public class VistaImagenesActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Actualiza los elementos de la interfaz gráfica con los datos de la ronda en curso.
+     * @param pregunta Objeto que contiene el nombre del recurso gráfico y las opciones.
+     * @param preguntaActual Índice de la iteración actual.
+     * @param totalPreguntas Cantidad total de preguntas de la sesión.
+     */
     public void mostrarPregunta(ControladorImagenes.PreguntaImagen pregunta, int preguntaActual, int totalPreguntas) {
         tvContador.setText(getString(R.string.pregunta_contador, preguntaActual, totalPreguntas));
 
+        // Resolución dinámica del identificador del recurso gráfico (drawable) a partir de su nombre en texto
         int resId = Resources.getSystem().getIdentifier(pregunta.getDrawableName(), "drawable", "android");
         if (resId == 0) {
             imageViewObjetivo.setImageResource(android.R.drawable.ic_menu_help);
         } else {
             imageViewObjetivo.setImageResource(resId);
         }
+
         imageViewObjetivo.setContentDescription(getString(R.string.descripcion_imagen_objetivo));
 
         mostrarOpciones(pregunta.getOpciones());
     }
 
+    /**
+     * Gestiona la visibilidad y el contenido de los botones de respuesta.
+     * Oculta los botones excedentes (View.GONE) dependiendo de la cantidad de opciones generadas.
+     */
     public void mostrarOpciones(List<String> opciones) {
         MaterialButton[] botones = getBotonesRespuesta();
         for (int i = 0; i < botones.length; i++) {
@@ -106,6 +144,10 @@ public class VistaImagenesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Despliega un cuadro de diálogo nativo (AlertDialog) para solicitar confirmación
+     * antes de cancelar y abandonar la sesión de ejercicio.
+     */
     public void confirmarSalida() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.salir_modulo);
@@ -120,6 +162,10 @@ public class VistaImagenesActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Muestra un diálogo modal con el resumen estadístico de la sesión finalizada.
+     * La propiedad setCancelable(false) obliga al usuario a interactuar explícitamente para cerrarlo.
+     */
     public void mostrarResultado(Sesion sesion) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.resultado_titulo);
@@ -140,9 +186,17 @@ public class VistaImagenesActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Despliega un mensaje emergente nativo (Toast) para proveer retroalimentación rápida al usuario.
+     */
     public void mostrarMensaje(int recursoTexto) {
         Toast.makeText(this, recursoTexto, Toast.LENGTH_SHORT).show();
     }
+
+    // =========================================================
+    // GETTERS
+    // Proveen acceso a los componentes visuales desde el controlador
+    // =========================================================
 
     public MaterialButton[] getBotonesRespuesta() {
         return new MaterialButton[]{btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4};
